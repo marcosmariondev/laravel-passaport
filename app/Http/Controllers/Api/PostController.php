@@ -24,7 +24,7 @@ class PostController extends BaseController
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -37,7 +37,7 @@ class PostController extends BaseController
             'content' => 'required',
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
@@ -48,24 +48,19 @@ class PostController extends BaseController
     /**
      * Display the specified resource.
      *
-     * @param  \App\Post  $post
+     * @param \App\Post $post
      * @return \Illuminate\Http\Response
      */
     public function show(Post $post)
     {
-
-        if (is_null($post)) {
-            return $this->sendError('Post not found.');
-        }
-
         return $this->sendResponse(new PostResource($post), 'Post retrieved successfully.');
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Post  $post
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Post $post
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Post $post)
@@ -79,17 +74,12 @@ class PostController extends BaseController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Post  $post
+     * @param \App\Post $post
      * @return \Illuminate\Http\Response
      */
     public function destroy(Post $post)
     {
-        if (is_null($post)) {
-            return $this->sendError('Post not found.');
-        }
-
         $post->delete();
-
         return $this->sendResponse([], 'Product deleted successfully.');
     }
 }
