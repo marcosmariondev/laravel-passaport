@@ -11,12 +11,11 @@
 |
 */
 
-Route::post('register', 'Api\RegisterController@register');
-Route::post('login', 'Api\RegisterController@login');
+Route::post('register', 'Api\AuthController@register');
+Route::post('login', 'Api\AuthController@login');
 
 Route::middleware('auth:api')->group(function () {
 
-    Route::resource('posts', 'Api\PostController')->except(['index', 'create']);
-
+    Route::resource('posts', 'Api\PostController')->except(['create', 'edit']);
 });
 
